@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Usia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body, :root {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid black;
+            width: 500px;
+            padding: 16px;
+        }
+        #birthday {
+            padding: 10px;
+            background: powderblue;
+            font-size: 20px;
+            border: none;
+        }
+        #check-button {
+            padding: 12px 24px; /* Mengatur padding secara horizontal */
+            background-color: #333333;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        #check-button:hover {
+            background-color: white;
+            color: black;
+        }
+        .result {
+            font-size: 18px;
+            color: black;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Cek Usia Kamu</h1>
+        <label>Masukkan Tahun Kelahiran Anda:</label>
+        <input type="number" placeholder="" id="birthday" class="form-control">
+        <button id="check-button" onclick="checkResult()" class="btn btn-dark btn-block">Cek Usia Anda</button>
+        <p class="result" id="resultView"></p>
+    </div>
+
+    <script>
+        function checkResult() {
+            const birthdayInput = document.getElementById("birthday");
+            const birthday = birthdayInput.value;
+
+            const now = new Date();
+            const birthDate = new Date(birthday, 0, 1);
+            const ageInMilliseconds = now - birthDate;
+            const ageDate = new Date(ageInMilliseconds);
+
+            const years = ageDate.getUTCFullYear() - 1970;
+            const months = ageDate.getUTCMonth();
+            const days = ageDate.getUTCDate() - 1;
+
+            const resultView = document.getElementById("resultView");
+            resultView.innerHTML = `Usia Anda saat ini adalah ${years} tahun, ${months} bulan, dan ${days} hari.`;
+        }
+    </script>
+</body>
+</html>
