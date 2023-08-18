@@ -32,8 +32,16 @@
             font-size: 20px;
             border: none;
         }
+        #birth-date, #birth-month, #birth-year {
+            display: inline-block;
+            padding: 10px;
+            background: powderblue;
+            font-size: 20px;
+            border: none;
+            width: 30%;
+        }
         #check-button {
-            padding: 12px 24px; /* Mengatur padding secara horizontal */
+            padding: 12px 24px;
             background-color: #333333;
             color: white;
             cursor: pointer;
@@ -53,20 +61,29 @@
 <body>
     <div class="container">
         <h1 class="text-center">Cek Usia</h1>
-        <label>Masukkan Tahun Kelahiran Anda:</label>
-        <input type="number" placeholder="" id="birthday" class="form-control">
+        <label>Masukkan Tanggal, Bulan, dan Tahun Kelahiran Anda:</label>
+        <div>
+            <input type="number" placeholder="Tanggal" id="birth-date" class="form-control">
+            <input type="number" placeholder="Bulan" id="birth-month" class="form-control">
+            <input type="number" placeholder="Tahun" id="birth-year" class="form-control">
+        </div>
         <button id="check-button" onclick="checkResult()" class="btn btn-dark btn-block">Cek Usia Anda</button>
         <p class="result" id="resultView"></p>
     </div>
 
     <script>
         function checkResult() {
-            const birthdayInput = document.getElementById("birthday");
-            const birthday = birthdayInput.value;
+            const birthDateInput = document.getElementById("birth-date");
+            const birthMonthInput = document.getElementById("birth-month");
+            const birthYearInput = document.getElementById("birth-year");
+
+            const birthDate = parseInt(birthDateInput.value);
+            const birthMonth = parseInt(birthMonthInput.value) - 1;
+            const birthYear = parseInt(birthYearInput.value);
 
             const now = new Date();
-            const birthDate = new Date(birthday, 0, 1);
-            const ageInMilliseconds = now - birthDate;
+            const birthDateObject = new Date(birthYear, birthMonth, birthDate);
+            const ageInMilliseconds = now - birthDateObject;
             const ageDate = new Date(ageInMilliseconds);
 
             const years = ageDate.getUTCFullYear() - 1970;
